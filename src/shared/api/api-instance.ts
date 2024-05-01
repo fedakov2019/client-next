@@ -1,94 +1,105 @@
-import axios,{AxiosError, AxiosRequestConfig} from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-const url=process.env.REACT_APP_HOST_URL;
+const url = process.env.REACT_APP_HOST_URL;
 
-console.log(process.env.NEXT_PUBLIC_RTY);
-console.log(url);
-export const apiInstance =axios.create({
-    withCredentials:true,
-   
-    baseURL:url,
-    headers: {
-      
-        post: {
-          'Content-Type': 'application/json'
-        }
-      }
+
+
+export const apiInstance = axios.create({
+  withCredentials: true,
+
+  baseURL: url,
+  headers: {
+    post: {
+      "Content-Type": "application/json",
+    },
+  },
 });
 
-
-export const createInstance=<T>(config: AxiosRequestConfig, options?:AxiosRequestConfig):Promise<T> =>{
-    return apiInstance({
-        ...config,
-            ...options,
-        }).then((r) => r.data);
+export const createInstance = <T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig,
+): Promise<T> => {
+  return apiInstance({
+    ...config,
+    ...options,
+  })
+    .then((r) => r.data)
+    
     
 };
-export const createInstancer=<T>(config: AxiosRequestConfig, options?:AxiosRequestConfig):Promise<T> =>{
+export const createInstancer = <T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig,
+): Promise<T> => {
   return instanceretry({
-      ...config,
-          ...options,
-      }).then((r) => r.data);
-  
+    ...config,
+    ...options,
+  }).then((r) => r.data);
 };
-export type BodyType<Data> =Data
-export type ErrorType<Error> = AxiosError<Error>
+export type BodyType<Data> = Data;
+export type ErrorType<Error> = AxiosError<Error>;
 
+export const instanceretry = axios.create({
+  withCredentials: true,
 
-
-export const instanceretry =axios.create({
-  withCredentials:true,
-  
-  baseURL:url,
+  baseURL: url,
   headers: {
-      
-      post: {
-        'Content-Type': 'application/json'
+    post: {
+      "Content-Type": "application/json",
+    },
+  },
+});
+apiInstance.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem("Token")}`;
+  return config;
+});
+instanceretry.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem("Token")}`;
+  return config;
+});
+type LoginType = { accesToken: string };
+instanceretry.interceptors.response.use(
+  (config: any) => {
+    return config;
+  },
+  async (error: any) => {
+    const originalRequest = error.config;
+    if (
+      error.response.status == 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+      try {
+        const response = await apiInstance
+          .post<LoginType>("/auth/sign-refrech")
+          .then();
+        localStorage.setItem("Token", response.data.accesToken);
+        return instanceretry.request(originalRequest);
+      } catch (e) {
+        console.log("Не авторизован");
       }
     }
-});
-apiInstance.interceptors.request.use((config)=>{config.headers.Authorization=`Bearer ${localStorage.getItem('Token')}`
-return config});
-instanceretry.interceptors.request.use((config)=>{config.headers.Authorization=`Bearer ${localStorage.getItem('Token')}`
-return config})
-type LoginType ={accesToken:string}
-instanceretry.interceptors.response.use((config:any)=>{return config},(
-  async (error:any) => {
-    const originalRequest =error.config
-        if ((error.response.status ==
-           401) &&(error.config)&&(!error.config._isRetry)) {
-            originalRequest._isRetry=true
-            try {
-                const response =await apiInstance.post<LoginType>('/auth/sign-refrech').then()
-                localStorage.setItem('Token',response.data.accesToken)
-                return instanceretry.request(originalRequest)
-            }
-catch(e) {
-console.log('Не авторизован')
-}
+  },
+);
 
-        }
-    }
-))
-
-export type ResponseTe<D={},Rs=ResultCode>={
-  userdata:D
-  messages:Array<string>
-  resultCode:Rs
-}
-export type ResponseT<D={},Rs=ResultCode>={
-    UserData:D
-    messages:Array<string>
-    resultCode:Rs
-}
+export type ResponseTe<D = {}, Rs = ResultCode> = {
+  userdata: D;
+  messages: Array<string>;
+  resultCode: Rs;
+};
+export type ResponseT<D = {}, Rs = ResultCode> = {
+  UserData: D;
+  messages: Array<string>;
+  resultCode: Rs;
+};
 export enum ResultCode {
-    Success = 0,
-    Error = 1,}
-
-export type ItemT<T>={
-items:Array<T>
-totalCount:number
-error:string|null
+  Success = 0,
+  Error = 1,
 }
 
-
+export type ItemT<T> = {
+  items: Array<T>;
+  totalCount: number;
+  error: string | null;
+};

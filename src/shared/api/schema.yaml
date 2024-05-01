@@ -5,12 +5,12 @@ paths:
       operationId: AppController_getHello
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelloWorldDto'
+                $ref: "#/components/schemas/HelloWorldDto"
   /auth/sign-up:
     post:
       operationId: AuthController_signUp
@@ -21,10 +21,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignUpBodyDto'
+              $ref: "#/components/schemas/SignUpBodyDto"
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
       tags:
         - Авторизация
   /auth/sign-in:
@@ -37,14 +37,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignInBodyDto'
+              $ref: "#/components/schemas/SignInBodyDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signinResp'
+                $ref: "#/components/schemas/signinResp"
       tags:
         - Авторизация
   /auth/sign-out:
@@ -53,8 +53,8 @@ paths:
       summary: Выход
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
         - Авторизация
   /auth/sign-refrech:
@@ -63,12 +63,12 @@ paths:
       summary: Обнавление токенов
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signinResp'
+                $ref: "#/components/schemas/signinResp"
       tags:
         - Авторизация
   /auth/session:
@@ -77,12 +77,12 @@ paths:
       summary: Вход по токену
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetSessionInfoDto'
+                $ref: "#/components/schemas/GetSessionInfoDto"
       tags:
         - Авторизация
   /auth/deletUser/{id}:
@@ -96,12 +96,12 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signdeluser'
+                $ref: "#/components/schemas/signdeluser"
       tags:
         - Авторизация
   /auth/user/{id}:
@@ -115,12 +115,12 @@ paths:
           schema:
             type: number
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/iduserdto'
+                $ref: "#/components/schemas/iduserdto"
       tags:
         - Авторизация
   /auth/register/{id}:
@@ -138,14 +138,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SignInBodyDto'
+              $ref: "#/components/schemas/SignInBodyDto"
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/iduserdto'
+                $ref: "#/components/schemas/iduserdto"
       tags:
         - Авторизация
   /roles:
@@ -158,14 +158,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/СreateRoledto'
+              $ref: "#/components/schemas/СreateRoledto"
       responses:
         default:
-          description: ''
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createdto'
+                $ref: "#/components/schemas/createdto"
       tags:
         - Роли
   /roles/{value}:
@@ -180,11 +180,11 @@ paths:
             type: string
       responses:
         default:
-          description: ''
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/roleiddto'
+                $ref: "#/components/schemas/roleiddto"
       tags:
         - Роли
   /roles/userrole:
@@ -197,14 +197,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddRoleDto'
+              $ref: "#/components/schemas/AddRoleDto"
       responses:
         default:
-          description: ''
+          description: ""
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userroledto'
+                $ref: "#/components/schemas/userroledto"
       tags:
         - Роли
   /roles/user/page={page}/count={count}:
@@ -223,19 +223,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/idusersdto'
+                  $ref: "#/components/schemas/idusersdto"
       tags:
         - Роли
 info:
   title: APP list
-  description: ''
+  description: ""
   version: 1.0.0
   contact: {}
 tags: []
@@ -257,7 +257,7 @@ components:
           example: test
         password:
           type: string
-          example: '1234'
+          example: "1234"
       required:
         - login
         - password
@@ -269,7 +269,7 @@ components:
           example: test
         password:
           type: string
-          example: '1234'
+          example: "1234"
       required:
         - login
         - password
@@ -368,7 +368,7 @@ components:
           example: 1
         photos:
           type: string
-          example: ''
+          example: ""
       required:
         - id
         - login
