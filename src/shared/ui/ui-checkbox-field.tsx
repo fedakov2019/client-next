@@ -15,17 +15,17 @@ export function UiCheckboxField({
   }: UiCheckboxFieldProps) {
     const id = useId();
     return (
-      <div className={clsx(className, "flex flex-col gap-1")}>
-       
+      <div className={clsx(className, "flex flex-row gap-3 content-center")}>
+       {label}
         <input
           {...inputProps}
           id={id}
           className={clsx(
             inputProps?.className,
-            "rounded border border-slate-300 focus:border-teal-600 px-2 h-10 outline-none",
+            "rounded border border-slate-300 focus:border-teal-600 px-5 h-15 outline-none",
           )}
         />
-        {label}
+        
       </div>
     );
   }

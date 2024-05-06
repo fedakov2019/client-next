@@ -1,4 +1,4 @@
-import { useSignUpMutation } from "@/features/auth/model/user-api";
+import { useSignUpMutation } from "@/entities/users/user-api";
 import { useForm } from "react-hook-form";
 
 export function useSignUpForm() {
@@ -8,7 +8,7 @@ export function useSignUpForm() {
     }>();
     
     const [
-        removeUser,
+        signUp,
         { error, isLoading,data },
       ]=useSignUpMutation()
 console.log(isLoading, data, error);
@@ -16,7 +16,7 @@ const errorMessage = error ? error.data.type : undefined;
 return {
     register,
     errorMessage,
-    handleSubmit: handleSubmit(datas=>removeUser({...datas})),
+    handleSubmit: handleSubmit(datas=>signUp({...datas})),
     isLoading: isLoading,
     errors,
   };

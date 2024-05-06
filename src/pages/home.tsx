@@ -2,6 +2,8 @@ import { UiButton } from "@/shared/ui/ui-button";
 import { UiPageSpinner } from "@/shared/ui/ui-page-spinner";
 import { UiHeader } from "@/shared/ui/ui-header";
 import { UiCheckboxField } from "@/shared/ui/ui-checkbox-field";
+import { Footer } from "@/shared/ui/ui-footer";
+import { Sidebar } from "@/shared/ui/sidebar/ui-sidebar";
 
 export function HomePage() {
   // useEffect(()=>{
@@ -9,7 +11,9 @@ export function HomePage() {
   //},[])
   return (
     <main className={`min-h-screen`}>
+     
       <UiHeader right={<div>fdkfdl</div>} />
+      <Sidebar/>
       <UiButton variant="primary">Hey</UiButton>
       <UiButton variant="secondary">Hey</UiButton>
       <UiButton variant="outlined">Hey</UiButton>
@@ -17,7 +21,8 @@ export function HomePage() {
         
         Hey
       </UiButton>
-      <UiCheckboxField label="Запомнить меня?:" inputProps={{ type: "checkbox", name:"rememberMe",}}></UiCheckboxField>
+      <Footer/>
+      
     </main>
   );
 }

@@ -57,6 +57,9 @@ export interface GetSessionInfoDto {
 export interface SigninResp {
   [key: string]: any;
 }
+export interface SignupResp {
+  id: number;
+}
 
 export interface SignInBodyDto {
   login: string;
@@ -87,7 +90,7 @@ export const authControllerSignUp = (
   signUpBodyDto: BodyType<SignUpBodyDto>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<SignupResp>(
     {
       url: `/auth/sign-up`,
       method: "POST",

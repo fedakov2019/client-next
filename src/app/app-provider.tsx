@@ -1,11 +1,11 @@
-import { store } from "@/shared/api/store";
+import { store } from "@/entities/store";
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
 
 
 export function AppProvider({ children }: { children?: React.ReactNode }) {
   return (
-  <Provider store={store}>
+  <Provider store={store()}>
     {children} </Provider>
   )
 }
