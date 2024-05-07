@@ -57,6 +57,9 @@ export interface GetSessionInfoDto {
 export interface SigninResp {
   [key: string]: any;
 }
+export interface SignupResp {
+  id: number;
+}
 
 export interface SignInBodyDto {
   login: string;
@@ -87,7 +90,7 @@ export const authControllerSignUp = (
   signUpBodyDto: BodyType<SignUpBodyDto>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<SignupResp>(
     {
       url: `/auth/sign-up`,
       method: "POST",
@@ -141,10 +144,22 @@ export const authControllerRefrech = (
 };
 
 /**
- * @summary Вход по токену
+ * @summary Вход по токену 
  */
 export const authControllerGetSessionInfo = (
   options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<GetSessionInfoDto>(
+    { url: `/auth/session`, method: "GET" },
+    options,
+  );
+};
+/**
+ * @summary Вход по токену  с повтором
+ */
+
+export const authControllerGetSessionInforef = (
+  options?: SecondParameter<typeof createInstancer>,
 ) => {
   return createInstancer<GetSessionInfoDto>(
     { url: `/auth/session`, method: "GET" },
