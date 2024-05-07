@@ -2,6 +2,13 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const url = process.env.REACT_APP_HOST_URL;
 
+<<<<<<< HEAD
+export const apiInstance = axios.create({
+  withCredentials: true,
+
+=======
+
+
 export const apiInstance = axios.create({
   withCredentials: true,
 
@@ -12,6 +19,43 @@ export const apiInstance = axios.create({
     },
   },
 });
+
+export const createInstance = <T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig,
+): Promise<T> => {
+  return apiInstance({
+    ...config,
+    ...options,
+  })
+    .then((r) => r.data)
+    
+    
+};
+export const createInstancer = <T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig,
+): Promise<T> => {
+  return instanceretry({
+    ...config,
+    ...options,
+  }).then((r) => r.data);
+};
+export type BodyType<Data> = Data;
+export type ErrorType<Error> = AxiosError<Error>;
+
+export const instanceretry = axios.create({
+  withCredentials: true,
+
+>>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc
+  baseURL: url,
+  headers: {
+    post: {
+      "Content-Type": "application/json",
+    },
+  },
+});
+<<<<<<< HEAD
 
 export const createInstance = <T>(
   config: AxiosRequestConfig,
@@ -44,6 +88,8 @@ export const instanceretry = axios.create({
     },
   },
 });
+=======
+>>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc
 apiInstance.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem("Token")}`;
   return config;

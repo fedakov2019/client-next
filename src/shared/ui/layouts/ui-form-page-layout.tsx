@@ -20,4 +20,8 @@ export function UiFormPageLayout({
       </main>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc

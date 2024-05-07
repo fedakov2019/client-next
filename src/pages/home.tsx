@@ -11,15 +11,29 @@ export function HomePage() {
   //},[])
   return (
     <main className={`min-h-screen`}>
+<<<<<<< HEAD
       <UiHeader right={<div>fdkfdl</div>} />
       <Sidebar />
+=======
+     
+      <UiHeader right={<div>fdkfdl</div>} />
+      <Sidebar/>
+>>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc
       <UiButton variant="primary">Hey</UiButton>
       <UiButton variant="secondary">Hey</UiButton>
       <UiButton variant="outlined">Hey</UiButton>
       <UiButton disabled variant="primary">
+<<<<<<< HEAD
         Hey
       </UiButton>
       <Footer />
+=======
+        
+        Hey
+      </UiButton>
+      <Footer/>
+      
+>>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc
     </main>
   );
 }
