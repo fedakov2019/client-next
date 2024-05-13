@@ -4,7 +4,7 @@ import { ROUTES } from "@/shared/constants/routes";
 import { UiPageSpinner } from "@/shared/ui/ui-page-spinner";
 
 import { useRouter } from "next/router";
-import { PropsWithChildren, ReactElement, useReducer } from "react";
+import { PropsWithChildren, ReactElement} from "react";
 
 export function protectedPage<P>(Component: (props: P) => ReactElement) {
   
@@ -12,26 +12,31 @@ export function protectedPage<P>(Component: (props: P) => ReactElement) {
     const router = useRouter();
     let remember:string|null='0';
     try {
-     remember=localStorage.getItem('RememberMe');}
-    catch(e){}
+      if (localStorage.getItem('RememberMe')){
+     remember=localStorage.getItem('RememberMe');}}
+    catch(e){
+      remember='0'
+    }
     
 
-    const rem=!remember? "0":remember
+    
     let rembool:boolean;
     
  
-    if (rem==='0') { rembool=false;
+    if (remember==='0') { rembool=false;
     }
     else {rembool=true  }
-    let{ isError, isLoading } = useGetUsersQuery(rembool);
+   
+    const {  isLoading,error } = useGetUsersQuery(rembool);
 
-
+  
 
     if (isLoading) {
       return <UiPageSpinner />;
     }
 
-    if (isError) {
+    if (error) {
+      
       router.replace(ROUTES.SIGN_IN);
     }
 

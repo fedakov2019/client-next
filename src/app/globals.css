@@ -1,18 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+
 
 :root {
-<<<<<<< HEAD
   --bg: #151c2c;
   --bgSoft: #182237;
   --text: white;
   --textSoft: #b7bac1;
 }
-=======
-    --bg: #151c2c;
-    --bgSoft: #182237;
-    --text: white;
-    --textSoft: #b7bac1;
-  }
->>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc

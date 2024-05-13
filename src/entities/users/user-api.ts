@@ -3,6 +3,7 @@ import {
   authControllerGetSessionInfo,
   authControllerGetSessionInforef,
   authControllerSignIn,
+  authControllerSignOut,
   authControllerSignUp,
 } from "../../shared/api/generated";
 
@@ -17,15 +18,50 @@ export const usersApi = createApi({
   endpoints: (builder) => ({
     getUsers: builder.query({
       queryFn: async (arg:boolean) => {
-        if (arg) {
-        return await authControllerGetSessionInforef()
-          .then((data) => data)
-          .catch((error) => error.response.data);}
-          else {
-            return await authControllerGetSessionInfo()
-          .then((data) => data)
-          .catch((error) => error.response.data);
-            
+        if (arg) { try 
+          {
+        const data = await authControllerGetSessionInforef()
+          .then(data => data)
+              return {data:data}
+
+          }
+          catch (e) {
+
+            const err = e as AxiosError;
+            return {
+             
+              error: {
+                status: err.response?.status,
+                data: err.response?.data || err.message,
+              },
+            };
+          }
+
+
+
+
+
+
+
+
+
+          }
+          else { try {
+            const data= await authControllerGetSessionInfo()
+          .then(data => data)
+          
+          return {data:data};}
+            catch (e){
+              const err = e as AxiosError;
+            return {
+             
+              error: {
+                status: err.response?.status,
+                data: err.response?.data || err.message,
+              },
+            };
+
+            }
           }
       },
     }),
@@ -54,7 +90,7 @@ export const usersApi = createApi({
     signIn: builder.mutation({
       queryFn: async (arg) => {
         try {
-          const dat = await authControllerSignIn({ ...arg }).then(
+          const dat = await authControllerSignIn({ login:arg.login,password:arg.password }).then(
             (data) => data
           );
 
@@ -70,10 +106,34 @@ export const usersApi = createApi({
         }
       },
     }),
+ signOut:builder.mutation({
+  queryFn:async()=>{
+ try {
+ const data=await authControllerSignOut().then(data=>data)
+
+
+return {data:1}}
+catch (e) {
+  const err = e as AxiosError;
+          return {
+            error: {
+              status: err.response?.status,
+              data: err.response?.data || err.message,
+            },
+          };
+        }
+
+}
+
+  
+ }),
+
+
+
   }),
 });
 
-export const { useGetUsersQuery, useSignUpMutation, useSignInMutation } =
+export const { useGetUsersQuery, useSignUpMutation, useSignInMutation, useSignOutMutation } =
   usersApi;
 
 export const fetchSesion = createAsyncThunk(

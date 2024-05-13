@@ -1,12 +1,24 @@
 import { UiButton } from "@/shared/ui/ui-button";
 import { UiTextField } from "@/shared/ui/ui-text-field";
 import { useSignInForm } from "../model/use-sign-in-form";
+
 import { UiCheckboxField } from "@/shared/ui/ui-checkbox-field";
+import Box from '@mui/joy/Box';
+import Alert  from "@mui/joy/Alert";
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import ReportIcon from '@mui/icons-material/Report';
+import IconButton from '@mui/joy/IconButton';
+import Typography from '@mui/joy/Typography';
+import { useState } from "react";
 
 export function SignInForm() {
+  const [open, setOpen] = useState(true);
   const { handleSubmit, isLoading, register, errorMessage, errors } =
     useSignInForm();
-
+    
+    const handleClose = () => {
+      setOpen(false);
+    };
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <UiTextField
@@ -39,15 +51,47 @@ export function SignInForm() {
         label="Запомнить меня?:"
         inputProps={{
           type: "checkbox",
-          ...register("rememberMe", { required: true }),
+          ...register("rememberMe"),
         }}
       />
 
-      <UiButton disabled={isLoading} variant="primary">
+      <UiButton disabled={isLoading} variant="primary" onClick={()=>(setOpen(true))}>
         Войти
       </UiButton>
+        {open && (
+      errorMessage && (<div>
+        
+       <Box sx={{ display: 'flex', gap: 2, width: '100%', flexDirection: 'column' }}>
+       
+         <Alert
+           key={"Error"}
+           
+           sx={{ alignItems: 'flex-start' }}
+           startDecorator={<ReportIcon />}
+           variant="soft"
+           color={"danger"}
+           endDecorator={
+             <IconButton variant="soft" color={"danger"} onClick={handleClose}>
+               <CloseRoundedIcon />
+             </IconButton>
+           }
+         >
+           <div>
+             <div>Error</div>
+             <Typography level="body-sm" color={"danger"}>
+               {errorMessage}
+             </Typography>
+           </div>
+         </Alert>
+       
+     </Box>
+      </div>)
+    
 
-      {errorMessage && <div className="text-rose-500">{errorMessage}</div>}
+)
+}
+      
+      
     </form>
   );
 }

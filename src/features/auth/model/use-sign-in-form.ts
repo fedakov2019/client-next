@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-import { PayloadAction } from "@reduxjs/toolkit";
+
 import { useSignInMutation } from "@/entities/users/user-api";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+
 import { ROUTES } from "@/shared/constants/routes";
 import router from "next/router";
 
@@ -17,17 +16,19 @@ export function useSignInForm() {
     password: string;
     rememberMe: boolean;
   }>();
-  const [rememb, setRememb] = useState(false);
+  
 
   const [signIn, { error, isLoading, data }] = useSignInMutation();
 
-  console.log(isLoading, data?.accesToken, error, getValues().rememberMe);
+  
   if (data) {
+    
     localStorage.setItem("Token", data.accesToken);
 
     localStorage.setItem("RememberMe", getValues().rememberMe ? "1" : "0");
 
     router.push(ROUTES.HOME);
+    
   }
 
   const errorMessage = error
@@ -40,41 +41,9 @@ export function useSignInForm() {
     errorMessage,
     handleSubmit: handleSubmit((datas) => {
       signIn({ login: datas.login, password: datas.password });
-      setRememb(datas.rememberMe);
+      
     }),
     isLoading: isLoading,
     errors,
   };
 }
-=======
-import { PayloadAction } from '@reduxjs/toolkit';
-import { useSignInMutation } from "@/entities/users/user-api";
-import { useForm } from "react-hook-form";
-import { useState } from 'react';
-
-export function useSignInForm() {
-    const {getValues, register, handleSubmit,formState: { errors }, }=useForm<{
-        login: string;
-        password:string;
-        rememberMe: boolean;
-    }>();
-  const [rememb, setRememb] = useState(false);
-    
-    const [
-        signIn,
-        { error, isLoading,data },
-      ]=useSignInMutation();
-      
-console.log(isLoading, data?.accesToken, error, getValues().rememberMe);
-const errorMessage = error ? error.data.type : undefined;
-return {
-    register,
-    errorMessage,
-    handleSubmit: handleSubmit(datas=>{signIn({login:datas.login,password:datas.password}); 
-    setRememb(datas.rememberMe)}),
-    isLoading: isLoading,
-    errors,
-  };
-
-}
->>>>>>> bc952f9fef0bdb70faebe640cfd98bc3a63524dc
