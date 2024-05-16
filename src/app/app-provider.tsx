@@ -1,11 +1,18 @@
 import { store } from "@/entities/store";
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
+
 import { ReactNode } from "react";
 import { Provider } from "react-redux";
-
+import { CssBaseline} from "@mui/material";
+import { ThemeProvider } from "@/features/theme/theme-provider";
+import { theme } from "./theme";
 
 export function AppProvider({ children }: { children?: ReactNode }) {
-  return <StyledEngineProvider injectFirst>
-  <CssVarsProvider><Provider store={store()}>{children} </Provider></CssVarsProvider>
-    </StyledEngineProvider>;
+  return ( <Provider store={store()}>
+    <ThemeProvider>
+       
+    <CssBaseline />
+   {children} 
+    </ThemeProvider>
+    
+    </Provider>)
 }

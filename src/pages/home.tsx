@@ -3,8 +3,9 @@ import { UiPageSpinner } from "@/shared/ui/ui-page-spinner";
 import { UiHeader } from "@/shared/ui/ui-header";
 import { UiCheckboxField } from "@/shared/ui/ui-checkbox-field";
 import { Footer } from "@/shared/ui/ui-footer";
-import { Sidebar } from "@/shared/ui/sidebar/ui-sidebar";
+import { Sidebar2 } from "@/shared/ui/sidebar/ui-sidebar2";
 import { Profile } from "@/widgets/pages";
+import {ToggleTheme} from "@/features/theme/toggle-theme";
 
 
 export function HomePage() {
@@ -13,18 +14,13 @@ export function HomePage() {
   // authControllerGetSessionInfo().then(console.log)
   //},[])
   return (
-    <main className={`min-h-screen`}>
+    <main className={`min-h-screen dark:bg-slate-900`}>
 
 
-      <UiHeader right={<Profile />} />
+      <UiHeader right={<Profile />}  action={<ToggleTheme/>} />
      
-      <Sidebar />
-      <UiButton variant="primary">Hey</UiButton>
-      <UiButton variant="secondary">Hey</UiButton>
-      <UiButton variant="outlined">Hey</UiButton>
-      <UiButton disabled variant="primary">
-        Hey
-      </UiButton>
+      <Sidebar2/>
+   
       <Footer />
     </main>
   );

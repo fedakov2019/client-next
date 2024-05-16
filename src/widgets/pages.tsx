@@ -1,5 +1,6 @@
 import { useGetUsersQuery } from "@/entities/users/user-api";
 import { SignOutButton } from "@/features/auth";
+import Image from "next/image";
 
 export function Profile() {
     let remember:string|null;
@@ -23,6 +24,13 @@ export function Profile() {
 
   return (
     <div className="flex gap-2 items-center">
+      <Image
+          className="rounded-full object-cover"
+          src={"/avatar.jpg"}
+          alt=""
+          width="50"
+          height="50"
+        />
       {data?.login}
       <SignOutButton />
     </div>

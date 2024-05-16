@@ -4,7 +4,7 @@ export const Footer = ({ className }: { className?: string }) => {
   return (
     <div
       className={clsx(
-        "flex items-center justify-between mt-8 text-[--textSoft]",
+        "flex items-center justify-around mt-8 text-[--textSoft]",
         className,
       )}
     >

@@ -9,7 +9,9 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ReportIcon from '@mui/icons-material/Report';
 import IconButton from '@mui/joy/IconButton';
 import Typography from '@mui/joy/Typography';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {  CssVarsProvider } from '@mui/joy/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 export function SignInForm() {
   const [open, setOpen] = useState(true);
@@ -19,16 +21,23 @@ export function SignInForm() {
     const handleClose = () => {
       setOpen(false);
     };
+   
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <UiTextField
         label="Имя"
+        
         error={errors.login?.message}
         inputProps={{
           placeholder: "login",
+         autoFocus:true,
+       
+          
           type: "text",
+          
           ...register("login", {
             required: { value: true, message: "Login не пустое значение" },
+            
           }),
         }}
       />
@@ -60,7 +69,8 @@ export function SignInForm() {
       </UiButton>
         {open && (
       errorMessage && (<div>
-        
+           <StyledEngineProvider injectFirst>
+  <CssVarsProvider>
        <Box sx={{ display: 'flex', gap: 2, width: '100%', flexDirection: 'column' }}>
        
          <Alert
@@ -85,6 +95,10 @@ export function SignInForm() {
          </Alert>
        
      </Box>
+     </CssVarsProvider>
+    
+   
+    </StyledEngineProvider>
       </div>)
     
 

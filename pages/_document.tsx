@@ -16,7 +16,7 @@ import type { DocumentHeadTagsProps } from '@mui/material-nextjs/v14-pagesRouter
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
   return (
-    <Html lang="en" className={roboto.className}>
+    <Html lang="en" className="dark">
       <Head>
         {/* PWA primary color */}
         <meta name="theme-color" content={theme.palette.primary.main} />
